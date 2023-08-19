@@ -18,6 +18,7 @@
 #define TURTLEBOT3_H_
 
 #include <stdint.h>
+
 #include "turtlebot3_motor_driver.h"
 #include "turtlebot3_sensor.h"
 #include "turtlebot3_controller.h"
@@ -27,9 +28,9 @@
 #define DEBUG_ENABLE 1
 
 #if DEBUG_ENABLE
-  #define DEBUG_SERIAL_BEGIN(x) SerialBT2.begin(x)
-  #define DEBUG_PRINT(x) SerialBT2.print(x)
-  #define DEBUG_PRINTLN(x) SerialBT2.println(x)
+  #define DEBUG_SERIAL_BEGIN(x) Serial1.begin(x)
+  #define DEBUG_PRINT(x) Serial1.print(x)
+  #define DEBUG_PRINTLN(x) Serial1.println(x)
 #else
   #define DEBUG_SERIAL_BEGIN(x) 
   #define DEBUG_PRINT(x) 
@@ -39,7 +40,7 @@
 const uint8_t FIRMWARE_VER = 5; //DYNAMIXEL2Arduino v0.6.1 or higher is required.
 const uint32_t INTERVAL_MS_TO_CONTROL_MOTOR = 20;
 const uint32_t INTERVAL_MS_TO_UPDATE_CONTROL_ITEM = 20;
-
+const uint32_t MAMUT_UPDATE=100;
 namespace TurtleBot3Core{
   void begin(const char* model_name);
   void run();
