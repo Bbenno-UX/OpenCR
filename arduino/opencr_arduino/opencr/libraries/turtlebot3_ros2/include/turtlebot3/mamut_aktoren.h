@@ -23,7 +23,9 @@ class Mamut_aktoren{
 ParamForSyncWriteInst_t sync_write_param;
 unsigned long coun;
 public:
-void init();
+
+void init(Dynamixel2Arduino& dxl_mamut);
+void settorque(bool onoff,Dynamixel2Arduino& dxl_mamut);
 void update(unsigned long tims,int32_t mamut_werte[],Dynamixel2Arduino& dxl_mamut);
 struct stepper diestepper[2];
 };

@@ -394,7 +394,8 @@ void TurtleBot3Core::begin(const char* model_name)
       DEBUG_PRINTLN();
     } 
   }
-  Mamut_1.init();
+  Mamut_1.init(motor_driver.getDxl());
+  Mamut_1.settorque(true,motor_driver.getDxl());
   // Init IMU 
   sensors.initIMU();
   sensors.calibrationGyro();
