@@ -22,6 +22,7 @@ class Mamut_aktoren{
 
 ParamForSyncWriteInst_t sync_write_param;
 unsigned long coun;
+bool dynxl_active;
 public:
 
 void init(Dynamixel2Arduino& dxl_mamut);

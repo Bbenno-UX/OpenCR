@@ -10,8 +10,10 @@ void Mamut_aktoren::init(Dynamixel2Arduino& dxl_mamut){
   pinMode(DIR2,OUTPUT);
   pinMode(STEP1,OUTPUT);
   pinMode(STEP2,OUTPUT);
+  dynxl_active=true;
   if(!dxl_mamut.ping(DYNXL_ID_1) || !dxl_mamut.ping(DYNXL_ID_2)){
     Serial1.println("failed to ping dxl");
+    dynxl_active=false;
   }
 
 }
@@ -25,7 +27,7 @@ sync_write_param.length = 4;
 //sync_write_param.is_info_changed=true;
 memcpy(sync_write_param.xel[0].data, &mamut_werte[2], sync_write_param.length);
 memcpy(sync_write_param.xel[1].data, &mamut_werte[3], sync_write_param.length);
-  if(!dxl_mamut.syncWrite(sync_write_param)){
+  if(dynxl_active && !dxl_mamut.syncWrite(sync_write_param)){
     Serial1.println("failed to send to dxl");
     
   }
@@ -42,7 +44,7 @@ void Mamut_aktoren::settorque(bool onoff,Dynamixel2Arduino& dxl_mamut){
   sync_write_param.xel[0].data[0] = onoff;
   sync_write_param.xel[1].data[0] = onoff;
   //sync_write_param.is_info_changed=true;
-  if(!dxl_mamut.syncWrite(sync_write_param) == true){
+  if(dynxl_active && !dxl_mamut.syncWrite(sync_write_param) == true){
     ret = true;
     Serial1.println("failed to set_torque");
   }
